@@ -203,11 +203,14 @@ INSERT INTO alunos (nome, data_de_nascimento,primeira_nota, segunda_nota, curso_
 <!-- ____________________________________________________________________ -->
 ### Consultas (Etapa 3)
 
-### 1) Faça uma consulta que mostre os alunos que nasceram antes do ano 2009
+### 1) Faça uma consulta que mostre os alunos 
+###    que nasceram antes do ano 2009
 ```sql
 
 -- 5ª Digitação (SQL para criar a consulta acima)
-
+SELECT nome,data_de_nascimento 
+FROM alunos 
+WHERE data_de_nascimento < '2009-01-01';
 ```
 ![Relatório 1](resultados_alunos/relatorio1.jpg)
 
@@ -226,7 +229,7 @@ SELECT nome, primeira_nota, segunda_nota, ROUND(AVG((primeira_nota + segunda_not
 ```sql
 
 -- 7ª Digitação (SQL para criar a consulta acima)
-
+SELECT titulo, carga_horaria, carga_horaria*0.25 "Limite de faltas (H)" FROM curso;
 ```
 ![Relatório 3](resultados_alunos/relatorio3.jpg)
 
@@ -235,7 +238,9 @@ SELECT nome, primeira_nota, segunda_nota, ROUND(AVG((primeira_nota + segunda_not
 ### 4) Faça uma consulta que mostre os nomes somente dos professores da área de desenvolvimento.
 ```sql
 
-SELECT nome, area_de_atuacao FROM professores WHERE area_de_atuacao LIKE "%desenvolvimento%";
+SELECT nome, area_de_atuacao 
+FROM professores 
+WHERE area_de_atuacao LIKE "%desenvolvimento%";
 
 ```
 ![Relatório 4](resultados_alunos/relatorio4.jpg)
@@ -245,16 +250,22 @@ SELECT nome, area_de_atuacao FROM professores WHERE area_de_atuacao LIKE "%desen
 ```sql
 
 -- 9ª Digitação (SQL para criar a consulta acima)
+SELECT COUNT(area_de_atuacao) AS "Quantidade de professores" 
+FROM professores 
+WHERE area_de_atuacao LIKE "%desenvolvimento%";
 
 ```
 ![Relatório 5](resultados_alunos/relatorio5.jpg)
 
 <!-- _________________________ -->
 
-### 6) Faça uma consulta que mostre o nome dos alunos, o título e a carga horária dos cursos que fazem.
+### 6) Faça uma consulta que mostre o nome dos alunos, 
+### o título e a carga horária dos cursos que fazem.
 ```sql
 
-SELECT alunos.nome, cursos.titulo, cursos.carga_horaria FROM alunos INNER JOIN cursos ON alunos.curso_id = cursos.id;
+SELECT alunos.nome, cursos.titulo, cursos.carga_horaria 
+FROM alunos INNER JOIN cursos 
+ON alunos.curso_id = cursos.id;
 
 ```
 ![Relatório 6](resultados_alunos/relatorio6.jpg)
@@ -263,7 +274,9 @@ SELECT alunos.nome, cursos.titulo, cursos.carga_horaria FROM alunos INNER JOIN c
 ### 7) Faça uma consulta que mostre o nome dos professores e o título do curso que lecionam. Classifique pelo nome do professor.
 ```sql
 
--- 11ª Digitação (SQL para criar a consulta acima)
+SELECT professores.nome, cursos.titulo,
+FROM pofessores INNER JOIN cursos 
+ON professores.curso_id = cursos.id;
 
 ```
 ![Relatório 7](resultados_alunos/relatorio7.jpg)
@@ -290,7 +303,13 @@ SELECT alunos.nome, cursos.titulo, professores.nome AS "Nome professor" FROM alu
 ```sql
 
 -- 13ª Digitação (SQL para criar a consulta acima)
-
+SELECT cursos.titulo AS "Matéria",
+COUNT(alunos.curso.id) AS "QTD Alunos"
+FROM alunos
+INNER JOIN cursos
+ON alunos.curso_id = cursos.id
+GROUP BY Matéria
+ORDER BY COUNT(alunos.curso_id) DESC;
 ```
 ![Relatório 9](resultados_alunos/relatorio9.jpg)
 
