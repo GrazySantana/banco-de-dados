@@ -1,43 +1,41 @@
-# Comandos SQL - referência
-<!-- ___________________________________________________ -->
+# Comandos SQL - Referência
+<!-- __________________________________________ -->
 ## Modelagem física
 
 ### Criar banco de dados
+
 ```sql
 
-CREATE DATABASE vendas CHARACTER SET utfBmb4,
+CREATE DATABASE vendas CHARACTER SET utf8mb4;
 
 ```
 
-
-<!-- ___________________________________________________ -->
+<!-- __________________________________________ -->
 
 ### Criar a tabela fabricantes
 
 ```sql
-
 CREATE TABLE fabricantes(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL
 )
+
 ```
-<!-- ___________________________________________________ -->
+<!-- __________________________________________ -->
 
 ### Criar a tabela produtos
 
 ```sql
-
 CREATE TABLE produtos(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
     descricao TEXT(1000) NOT NULL,
     preco DECIMAL(6,2) NOT NULL,
-    quantidade TINYINT(4) NOT NULL,
+    quantidade TINYINT(4) NOT NULL
 )
 
 ```
-
-<!-- ___________________________________________________ -->
+<!-- __________________________________________ -->
 
 ### Adicionar campo/coluna em uma tabela
 
@@ -47,8 +45,7 @@ ALTER TABLE produtos ADD fabricante_id INT NOT NULL
 AFTER quantidade;
 
 ```
-
-<!-- ___________________________________________________ -->
+<!-- __________________________________________ -->
 
 ### Criação da chave estrangeira (relacionamento entre tabelas)
 
@@ -56,10 +53,9 @@ AFTER quantidade;
 
 ALTER TABLE produtos
     # CONSTRAINT é uma restrição definida no relacionamento
-ADD CONSTRAINT fk_produtos_fabricantes
+    ADD CONSTRAINT fk_produtos_fabricantes
 
-    # A chave estrangeira deve fazer referência a chave primária
-FOREIGN KEY (fabricante_id) REFERENCES fabricantes(id)
+    # A chave estrangeira deve fazer referência a chave primaria
+    FOREIGN KEY(fabricante_id) REFERENCES fabricantes(id)
 
 ```
-
